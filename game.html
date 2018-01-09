@@ -25,6 +25,11 @@ window.onload = function() {
 }
 
 function updateAll() {
+	moveAll();
+	drawAll();
+}
+
+function moveAll() {
 	ballX += ballSpeedX;
 
 	if (ballX > canvas.width) {
@@ -44,13 +49,15 @@ function updateAll() {
 	if (ballY < 0) {
 		ballSpeedY *= -1;
 	}
-
+}
+	
+function drawAll() {
 	canvasContext.fillStyle = 'black';
 	canvasContext.fillRect(0, 0, canvas.width, canvas.width);
 	
 	canvasContext.fillStyle = 'white';
 	canvasContext.beginPath();
-	canvasContext.arc(ballX, 100, 10, 0, Math.PI*2, true);
+	canvasContext.arc(ballX, ballY, 10, 0, Math.PI*2, true);
 	canvasContext.fill();
 }
 
