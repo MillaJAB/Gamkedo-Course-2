@@ -11,6 +11,9 @@
 <script>
 var canvas, canvasContext;
 var ballX = 75;
+var ballSpeedX = 5;
+var ballY = 75;
+var ballSpeedY = 7;
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
@@ -22,7 +25,25 @@ window.onload = function() {
 }
 
 function updateAll() {
-	ballX += 5;
+	ballX += ballSpeedX;
+
+	if (ballX > canvas.width) {
+		ballSpeedX *= -1;
+	}
+
+	if (ballX < 0) {
+		ballSpeedX *= -1;
+	}
+
+	ballY += ballSpeedY;
+
+	if (ballY > canvas.height) {
+		ballSpeedY *= -1;
+	}
+
+	if (ballY < 0) {
+		ballSpeedY *= -1;
+	}
 
 	canvasContext.fillStyle = 'black';
 	canvasContext.fillRect(0, 0, canvas.width, canvas.width);
