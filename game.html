@@ -15,12 +15,29 @@ var ballSpeedX = 5;
 var ballY = 75;
 var ballSpeedY = 7;
 
+const PADDLE_WIDTH = 100;
+const PADDLE_THICKNESS = 10;
+const PADDLE_DIST_FROM_EDGE = 60;
+var paddleX = 400;
+
+function updateMousePos(evt) {
+	var rect = canvas.getBoundingClientRect();
+	var root = document.documentElement;
+
+	var mouseX = evt.clientX - rect.left - root.scrollLeft;
+	//var mouseY = evt.clientY - rect.top - root.scrollTop;
+
+	paddleX = mouseX - PADDLE_WIDTH/2;
+}
+
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
 	
 	var framesPerSecond = 30;
 	setInterval(updateAll, 1000/framesPerSecond);
+
+	canvas.addEventListener('mousemove', updateMousePos);
 	
 }
 
@@ -29,31 +46,47 @@ function updateAll() {
 	drawAll();
 }
 
+function ballReset() {
+	ballX = canvas.width/2;
+	ballY = canvas.height/2;
+}
+
 function moveAll() {
 	ballX += ballSpeedX;
 
-	if (ballX > canvas.width) {
+	if (ballX > canvas.width) { //right side
 		ballSpeedX *= -1;
 	}
 
-	if (ballX < 0) {
+	if (ballX < 0) { //left side
 		ballSpeedX *= -1;
 	}
 
 	ballY += ballSpeedY;
 
-	if (ballY > canvas.height) {
+	if (ballY > canvas.height) {  //bottom
+		ballReset(); 
+	}
+
+	if (ballY < 0) { //top
 		ballSpeedY *= -1;
 	}
 
-	if (ballY < 0) {
+	var paddleTopEdgeY = canvas.height-PADDLE_DIST_FROM_EDGE;
+	var paddleBottomEdgeY = paddleTopEdgeY + PADDLE_THICKNESS;
+	var paddleLeftEdgeX = paddleX;
+	var paddleRightEdgeX = paddleX + PADDLE_WIDTH;
+	if (ballY > paddleTopEdgeY && // below top of paddle
+		ballY < paddleBottomEdgeY && // above bottom of paddle
+		ballX > paddleLeftEdgeX && // right side of left paddle
+		ballX < paddleRightEdgeX) // left of right side of paddle
 		ballSpeedY *= -1;
-	}
 }
 	
 function drawAll() {
 	colorRect(0, 0, canvas.width, canvas.height, 'black');
 	colorCircle(ballX, ballY, 10, 'white');
+	colorRect(paddleX,canvas.height-PADDLE_DIST_FROM_EDGE, PADDLE_WIDTH,PADDLE_THICKNESS, 'white');
 }
 
 function colorRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColor) {
