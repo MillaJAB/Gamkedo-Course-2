@@ -44,9 +44,9 @@ function brickReset() {
 			brickGrid[i] = true;
 		} else {
 			brickGrid[i] = false;
-		}
-	}
-}
+		} // end of if statement (rand check)
+	} // end of for loop
+} // end of brickReset func
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
@@ -113,9 +113,9 @@ function drawBricks() {
 	for(var i=0;i<BRICK_COUNT;i++) {
 		if (brickGrid[i]) {
 		colorRect(BRICK_W*i,0, BRICK_W-2, BRICK_H, "blue");
-		}
-	}
-}
+		} // end of if this brick is here
+	} // end of loop through array
+} // end of drawBricks func
 	
 function drawAll() {
 	colorRect(0, 0, canvas.width, canvas.height, 'black');
