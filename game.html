@@ -20,7 +20,7 @@ const BRICK_H = 50;
 const BRICK_COLS = 8;
 const BRICK_ROWS = 4;
 const BRICK_GAP = 2;
-var brickGrid = new Array(BRICK_COLS)
+var brickGrid = new Array(BRICK_COLS * BRICK_ROWS)
 
 const PADDLE_WIDTH = 100;
 const PADDLE_THICKNESS = 10;
@@ -41,7 +41,7 @@ function updateMousePos(evt) {
 }
 
 function brickReset() {
-	for (var i = 0; i < BRICK_COLS; i++) {
+	for (var i = 0; i < BRICK_COLS * BRICK_ROWS; i++) {
 		/*if (Math.random() < 0.5) {
 			brickGrid[i] = true;
 		} else {
