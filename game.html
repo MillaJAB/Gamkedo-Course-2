@@ -136,6 +136,10 @@ function drawAll() {
 	var mouseBrickRow = Math.floor(mouseY / BRICK_H);
 	var brickIndexUnderMouse = rowColToArrayIndex(mouseBrickCol, mouseBrickRow);
 	colorText(mouseBrickCol + "," + mouseBrickRow + " :" + brickIndexUnderMouse, mouseX,mouseY, "yellow");
+
+	if (brickIndexUnderMouse >= 0 && brickIndexUnderMouse < BRICK_COLS * BRICK_ROWS) {
+		brickGrid[brickIndexUnderMouse] = false;
+	}
 }
 
 function colorRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColor) {
