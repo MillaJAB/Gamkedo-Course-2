@@ -86,17 +86,17 @@ function ballMove() {
 	ballX += ballSpeedX;
 	ballY += ballSpeedY;
 
-	if (ballX > canvas.width) { //right side
+	if (ballX > canvas.width && ballSpeedX > 0.0) { //right side
 		ballSpeedX *= -1;
 	}
-	if (ballX < 0) { //left side
+	if (ballX < 0 && ballSpeedX < 0.0) { //left side
 		ballSpeedX *= -1;
 	}
 	if (ballY > canvas.height) {  //bottom
 		ballReset();
 		brickReset(); 
 	}
-	if (ballY < 0) { //top
+	if (ballY < 0 && ballSpeedY < 0.0) { //top
 		ballSpeedY *= -1;
 	}
 }
