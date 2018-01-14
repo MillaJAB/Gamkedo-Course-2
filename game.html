@@ -69,7 +69,7 @@ window.onload = function() {
 	canvas.addEventListener('mousemove', updateMousePos);
 
 	brickReset();
-	//ballReset();
+	ballReset();
 }
 
 function updateAll() {
@@ -163,8 +163,11 @@ function ballPaddleHandling() {
 		var ballDistFromPaddleCenterX = ballX - centerOfPaddleX;
 		ballSpeedX = ballDistFromPaddleCenterX * 0.35;
 
-	}
-}
+		if (bricksLeft == 0) {
+			brickReset();
+		} // out of bricks
+	} // checking if ball is in center of paddle
+} // end of ballPaddleHandling func
 
 function moveAll() {
 	ballMove();
